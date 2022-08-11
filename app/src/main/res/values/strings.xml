@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LockScreenMessage</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="developer">DEVELOPER</string>
+    <string name="licences">LICENCES</string>
+    <string name="app_version">Version 1.0.0</string>
+    <string name="info">The app LockScreenMessage lets you show any message you like permanently on your lock screen.</string>
+</resources>
