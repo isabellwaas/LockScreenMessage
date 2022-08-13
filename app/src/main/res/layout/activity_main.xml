@@ -42,30 +42,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:layout_gravity="left"
-                android:text="@string/instruction" />
+                android:layout_gravity="start"
+                android:text="@string/instruction"
+                android:textSize="16sp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/show_switch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="false"
+                android:text="@string/showMessage"
+                android:textSize="16sp"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/lock_screen_message_title_text_input"
+                android:id="@+id/title_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="@string/title">
+                app:startIconDrawable="@drawable/ic_title">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:maxLength="65"
+                    android:gravity="top"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/lock_screen_message_content_text_input"
+                android:id="@+id/content_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/content">
+                app:startIconDrawable="@drawable/ic_notes">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:minLines="4"
+                    android:maxLines="4"
+                    android:maxLength="240"
+                    android:gravity="top"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
@@ -78,15 +95,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/save" />
+                    android:enabled="false"
+                    android:text="@string/save"
+                    />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/delete_button"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_toStartOf="@id/save_button"
+                    android:enabled="false"
                     android:text="@string/delete" />
 
             </RelativeLayout>
