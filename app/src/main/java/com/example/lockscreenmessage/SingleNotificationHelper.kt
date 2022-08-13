@@ -8,6 +8,7 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 
 
 class SingleNotificationHelper(override var notificationIsPresent: Boolean = false):ISingleNotificationHelper
@@ -39,10 +40,6 @@ class SingleNotificationHelper(override var notificationIsPresent: Boolean = fal
                     .setSilent(true)
                     .setSound(null)
                     .setOngoing(true)
-
-
-            //Backgroundcolor? setColor und setColorized
-
 
             NotificationManagerCompat.from(context).notify(notificationId, builder.build())
             notificationIsPresent=true
