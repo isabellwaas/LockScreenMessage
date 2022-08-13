@@ -10,9 +10,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
 
-class NotificationHelper(var notificationIsPresent:Boolean = false)
+class SingleNotificationHelper(override var notificationIsPresent: Boolean = false):ISingleNotificationHelper
 {
-    fun createNotificationChannel(id:String, name:String, description:String, importance:Int, lockscreenVisibility:Int, context:Context)
+    override fun createNotificationChannel(id:String, name:String, description:String, importance:Int, lockscreenVisibility:Int, context:Context):Unit
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
@@ -24,7 +24,7 @@ class NotificationHelper(var notificationIsPresent:Boolean = false)
         }
     }
 
-    fun sendNotification(context:Context, channelId:String, notificationId:Int, title:String, text:String)
+    override fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String):Unit
     {
         if(!notificationIsPresent)
         {
@@ -42,16 +42,14 @@ class NotificationHelper(var notificationIsPresent:Boolean = false)
 
 
             //Backgroundcolor? setColor und setColorized
-            val notification:Notification=builder.build().apply {
-                //flags = Notification.FLAG_NO_CLEAR
-            }
 
-            NotificationManagerCompat.from(context).notify(notificationId, notification)
+
+            NotificationManagerCompat.from(context).notify(notificationId, builder.build())
             notificationIsPresent=true
         }
     }
 
-    fun cancelNotification(context:Context, id:Int)
+    override fun cancelNotificationIfOnePresent(context:Context, id:Int):Unit
     {
         if(notificationIsPresent)
         {

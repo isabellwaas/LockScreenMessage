@@ -20,10 +20,10 @@ class NotificationService: Service()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int
     {
-        val serviceNotificationHelper:NotificationHelper = NotificationHelper()
-        serviceNotificationHelper.createNotificationChannel("serviceChannel", "Service message", "Shows that your service is running.", NotificationManager.IMPORTANCE_DEFAULT, Notification.VISIBILITY_PRIVATE, this.applicationContext)
+        val serviceSingleNotificationHelper:ISingleNotificationHelper = SingleNotificationHelper()
+        serviceSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.serviceChannelId), "Service message", "Shows that your service is running.", NotificationManager.IMPORTANCE_DEFAULT, Notification.VISIBILITY_PRIVATE, this.applicationContext)
 
-        val notification: Notification = NotificationCompat.Builder(this, "serviceChannel")
+        val notification: Notification = NotificationCompat.Builder(this, getString(com.example.lockscreenmessage.R.string.serviceChannelId))
             .setContentTitle("Example Service")
             .setContentText("Service is running")
             .setSmallIcon(R.drawable.sym_def_app_icon)
@@ -36,10 +36,10 @@ class NotificationService: Service()
     override fun onCreate()
     {
         super.onCreate()
-        val notificationHelper:NotificationHelper = NotificationHelper()
-        notificationHelper.createNotificationChannel("lockScreenChannel", "Lock screen message", "The Lock screen message you have set.", NotificationManager.IMPORTANCE_HIGH, Notification.VISIBILITY_PUBLIC, this.applicationContext)
+        val lockScreenSingleNotificationHelper:ISingleNotificationHelper = SingleNotificationHelper()
+        lockScreenSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.lockScreenChannelId), "Lock screen message", "The Lock screen message you have set.", NotificationManager.IMPORTANCE_HIGH, Notification.VISIBILITY_PUBLIC, this.applicationContext)
 
-        receiver=LockUnlockBroadcastReceiver(notificationHelper, getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager)
+        receiver=LockUnlockBroadcastReceiver(lockScreenSingleNotificationHelper, getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager)
 
         registerReceiver(receiver, IntentFilter().apply
         {
