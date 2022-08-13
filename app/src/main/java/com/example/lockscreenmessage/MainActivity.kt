@@ -19,6 +19,11 @@ class MainActivity : AppCompatActivity()
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
+        activityMainBinding.topAppBar.menu.findItem(R.id.about).setOnMenuItemClickListener {
+            startActivity(Intent(this, AboutActivity::class.java))
+            true
+        }
+
         val persistentSaver:IPersistentSaver=PersistentSaver(getSharedPreferences("settings", Context.MODE_PRIVATE))
         persistentSaver.writeValue(getString(R.string.lockScreenMessageId), 11223344)
 
