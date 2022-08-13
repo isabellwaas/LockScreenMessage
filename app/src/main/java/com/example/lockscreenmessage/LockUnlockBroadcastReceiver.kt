@@ -9,18 +9,19 @@ class LockUnlockBroadcastReceiver(val singleNotificationHelper: ISingleNotificat
 {
     override fun onReceive(context: Context?, intent: Intent?)
     {
-        if (intent?.getAction().equals(Intent.ACTION_SCREEN_OFF) && this.keyguardManager.isDeviceLocked)
+        if(context != null)
         {
-            println("screen off")
-            if(context != null) this.singleNotificationHelper.sendNotificationIfNonePresent(context,context.getString(com.example.lockscreenmessage.R.string.lockScreenChannelId), 123, "Contact Info", "This is Max's Phone. If you found it please call 012345679.")
-            else println("context is null")
+            val persistentSaver:IPersistentSaver=PersistentSaver(context.getSharedPreferences("settings", Context.MODE_PRIVATE))
+            if (intent?.getAction().equals(Intent.ACTION_SCREEN_OFF) && this.keyguardManager.isDeviceLocked)
+            {
+                this.singleNotificationHelper.sendNotificationIfNonePresent(context,context.getString(com.example.lockscreenmessage.R.string.lockScreenChannelId), persistentSaver.readValue(context.getString(com.example.lockscreenmessage.R.string.lockScreenMessageId), 11223344), persistentSaver.readValue(context.getString(com.example.lockscreenmessage.R.string.lockScreenMessageTitle), ""), persistentSaver.readValue(context.getString(com.example.lockscreenmessage.R.string.lockScreenMessageContent), ""))
+            }
+            else if((intent?.getAction().equals(Intent.ACTION_SCREEN_ON) && !this.keyguardManager.isDeviceLocked) || intent?.getAction().equals(Intent.ACTION_USER_PRESENT))
+            {
+                this.singleNotificationHelper.cancelNotificationIfOnePresent(context, persistentSaver.readValue(context.getString(com.example.lockscreenmessage.R.string.lockScreenMessageId), 11223344))
+            }
         }
-        else if((intent?.getAction().equals(Intent.ACTION_SCREEN_ON) && !this.keyguardManager.isDeviceLocked) || intent?.getAction().equals(Intent.ACTION_USER_PRESENT))
-        {
-            println("screen on")
-            if(context != null) this.singleNotificationHelper.cancelNotificationIfOnePresent(context, 123)
-            else println("context is null")
-        }
+        else println("context is null")
     }
 
 }

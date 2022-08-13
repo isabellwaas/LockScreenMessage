@@ -6,10 +6,13 @@
     <string name="licences">LICENCES</string>
     <string name="app_version">Version 1.0.0</string>
     <string name="info">The app LockScreenMessage lets you show any message you like permanently on your lock screen.</string>
-    <string name="lockScreenMessageTitle">Title</string>
-    <string name="lockScreenMessageContent">Content</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="serviceChannelId">serviceChannel</string>
     <string name="lockScreenChannelId">lockScreenChannel</string>
+    <string name="lockScreenMessageTitle">lockScreenMessageTitle</string>
+    <string name="lockScreenMessageContent">lockScreenMessageContent</string>
+    <string name="lockScreenMessageId">lockScreenMessageId</string>
 </resources>
