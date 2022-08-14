@@ -4,9 +4,9 @@ import android.content.SharedPreferences
 
 class PersistentSaver(override val sharedPreferences: SharedPreferences):IPersistentSaver
 {
-    override fun readValue(key:String, defaultValue:String?):String
+    override fun readValue(key:String, defaultValue:String?):String?
     {
-        return this.sharedPreferences.getString(key, defaultValue) ?: ""
+        return this.sharedPreferences.getString(key, defaultValue)
     }
 
     override fun readValue(key: String, defaultValue: Int): Int {
