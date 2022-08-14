@@ -82,7 +82,7 @@
                     android:minLines="4"
                     android:maxLines="4"
                     android:maxLength="240"
-                    android:gravity="top"/>
+                    android:gravity="top" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout

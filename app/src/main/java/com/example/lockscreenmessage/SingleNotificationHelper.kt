@@ -15,14 +15,12 @@ class SingleNotificationHelper(override var notificationIsPresent: Boolean = fal
 {
     override fun createNotificationChannel(id:String, name:String, description:String, importance:Int, lockscreenVisibility:Int, context:Context):Unit
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            val notificationChannel = NotificationChannel(id, name, importance)
-            notificationChannel.setDescription(description)
-            notificationChannel.lockscreenVisibility=lockscreenVisibility
+        val notificationChannel = NotificationChannel(id, name, importance)
+        notificationChannel.description = description
+        notificationChannel.setSound(null, null)
+        notificationChannel.lockscreenVisibility=lockscreenVisibility
 
-            NotificationManagerCompat.from(context).createNotificationChannel(notificationChannel)
-        }
+        NotificationManagerCompat.from(context).createNotificationChannel(notificationChannel)
     }
 
     override fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String):Unit
