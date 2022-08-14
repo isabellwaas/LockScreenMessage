@@ -18,4 +18,5 @@
     <string name="ok">Ok</string>
     <string name="showMessage">Show Message</string>
     <string name="alertDialogMessage">At least one of the text fields must contain text.</string>
+    <string name="messageSaved">Message saved.</string>
 </resources>

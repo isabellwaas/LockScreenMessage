@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.example.lockscreenmessage.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import java.util.function.Predicate
 
 
@@ -26,11 +27,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        val persistentSaver: IPersistentSaver = PersistentSaver(getSharedPreferences("settings", Context.MODE_PRIVATE))
+        persistentSaver.writeValue(getString(R.string.lockScreenMessageId), 11223344)
+
         var serviceRunning: Boolean = false
         activityMainBinding.showSwitch.setOnCheckedChangeListener { view, isChecked ->
             if (isChecked && !serviceRunning)
             {
-                if(activityMainBinding.titleTextInput.editText?.text.toString().isBlank() && activityMainBinding.contentTextInput.editText?.text.toString().isBlank())
+                if(persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lockScreenMessageTitle),null).isNullOrBlank() && persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lockScreenMessageContent), null).isNullOrBlank())
                 {
                     MaterialAlertDialogBuilder(this)
                     .setMessage(getString(R.string.alertDialogMessage))
@@ -38,8 +42,7 @@ class MainActivity : AppCompatActivity() {
                         .show()
                     activityMainBinding.showSwitch.isChecked=false
                 }
-                else
-                {
+                else {
                     ContextCompat.startForegroundService(this, Intent(this, NotificationService::class.java))
                     serviceRunning = true
                 }
@@ -49,17 +52,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val persistentSaver: IPersistentSaver = PersistentSaver(getSharedPreferences("settings", Context.MODE_PRIVATE))
-        persistentSaver.writeValue(getString(R.string.lockScreenMessageId), 11223344)
-
         activityMainBinding.saveButton.setOnClickListener {
             persistentSaver.writeValue(getString(R.string.lockScreenMessageTitle), activityMainBinding.titleTextInput.editText?.text.toString())
             persistentSaver.writeValue(getString(R.string.lockScreenMessageContent), activityMainBinding.contentTextInput.editText?.text.toString())
+            Snackbar.make(activityMainBinding.root, getString(R.string.messageSaved), Snackbar.LENGTH_SHORT).show()
         }
 
         activityMainBinding.deleteButton.setOnClickListener {
             activityMainBinding.contentTextInput.editText?.text?.clear()
             activityMainBinding.titleTextInput.editText?.text?.clear()
+            activityMainBinding.contentTextInput.editText?.clearFocus()
+            activityMainBinding.titleTextInput.editText?.clearFocus()
             persistentSaver.removeValue(getString(R.string.lockScreenMessageTitle))
             persistentSaver.removeValue(getString(R.string.lockScreenMessageContent))
         }
