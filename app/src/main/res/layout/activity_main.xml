@@ -59,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                app:startIconDrawable="@drawable/ic_title">
+                app:startIconDrawable="@drawable/ic_title"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -67,6 +68,7 @@
                     android:singleLine="true"
                     android:maxLength="65"
                     android:gravity="top"
+                    android:paddingTop="13dp"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +76,8 @@
                 android:id="@+id/content_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/ic_notes">
+                app:startIconDrawable="@drawable/ic_notes"
+                app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -82,7 +85,8 @@
                     android:minLines="4"
                     android:maxLines="4"
                     android:maxLength="240"
-                    android:gravity="top" />
+                    android:gravity="top"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <RelativeLayout
