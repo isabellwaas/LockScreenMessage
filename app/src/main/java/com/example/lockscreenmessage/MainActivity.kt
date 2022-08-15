@@ -5,13 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import com.example.lockscreenmessage.databinding.ActivityMainBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
-import java.util.function.Predicate
 
 
 class MainActivity : AppCompatActivity() {
@@ -55,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.saveButton.setOnClickListener {
             persistentSaver.writeValue(getString(R.string.lockScreenMessageTitle), activityMainBinding.titleTextInput.editText?.text.toString())
             persistentSaver.writeValue(getString(R.string.lockScreenMessageContent), activityMainBinding.contentTextInput.editText?.text.toString())
+            val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(activityMainBinding.root.getWindowToken(), 0)
             Snackbar.make(activityMainBinding.root, getString(R.string.messageSaved), Snackbar.LENGTH_SHORT).show()
         }
 
