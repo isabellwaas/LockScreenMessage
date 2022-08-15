@@ -6,7 +6,7 @@
     <string name="licences">LICENCES</string>
     <string name="app_version">Version 1.0.0</string>
     <string name="info">The app LockScreenMessage lets you show any message you like permanently on your lock screen.</string>
-    <string name="instruction">Here you can set the message you want to show on your lock screen. A good idea would be to enter information about the owner of this device.</string>
+    <string name="instruction">Here you can set the message you want to be shown on your lock screen. A good idea would be to enter information about the owner of this device.</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="serviceChannelId">serviceChannel</string>
