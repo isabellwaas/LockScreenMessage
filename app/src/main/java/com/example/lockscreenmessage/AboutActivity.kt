@@ -27,5 +27,10 @@ class AboutActivity: AppCompatActivity()
         aboutBinding.licences.setOnClickListener { view: View? ->
             startActivity(Intent(applicationContext, LicensesActivity::class.java))
         }
+
+        setSupportActionBar(aboutBinding.topAppBar)
+        aboutBinding.topAppBar.setNavigationOnClickListener(View.OnClickListener {
+            finish()
+        })
     }
 }
