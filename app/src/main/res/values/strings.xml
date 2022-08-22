@@ -1,23 +1,28 @@
 <resources>
-    <string name="app_name">LockScreenMessage</string>
+    <string name="app_name" translatable="false">LockScreenMessage</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="developer_capslock">DEVELOPER</string>
     <string name="licences_capslock">LICENCES</string>
     <string name="licences">Licenses</string>
     <string name="app_version">Version 1.0.0</string>
     <string name="info">The app LockScreenMessage lets you show any message you like permanently on your lock screen.</string>
-    <string name="instruction">Here you can set the message you want to be shown on your lock screen. A good idea would be to enter information about the owner of this device.</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
-    <string name="serviceChannelId">serviceChannel</string>
-    <string name="lockScreenChannelId">lockScreenChannel</string>
-    <string name="lockScreenMessageTitle">lockScreenMessageTitle</string>
-    <string name="lockScreenMessageContent">lockScreenMessageContent</string>
-    <string name="lockScreenMessageId">lockScreenMessageId</string>
+    <string name="service_channel_id">serviceChannel</string>
+    <string name="lock_screen_channel_id">lockScreenChannel</string>
+    <string name="lock_screen_message_title">lockScreenMessageTitle</string>
+    <string name="lock_screen_message_content">lockScreenMessageContent</string>
+    <string name="lock_screen_message_id">lockScreenMessageId</string>
     <string name="about">About</string>
     <string name="ok">Ok</string>
-    <string name="showMessage">Show Message</string>
-    <string name="alertDialogMessage">At least one of the text fields must contain text.</string>
-    <string name="messageSaved">Message saved.</string>
+    <string name="show_message">Show Message</string>
+    <string name="alert_dialog_message">At least one of the text fields must contain text.</string>
+    <string name="message_saved">Message saved.</string>
+    <string name="Service_channel_name">Service</string>
+    <string name="Service_message_content">This notification is necessary. Hide it by long pressing and disabling the service channel.</string>
+    <string name="Service_channel_description">This channel is necessary for the service to work. You can still hide its notifications.</string>
+    <string name="Lock_screen_message_channel_name">Persistent lock screen message</string>
+    <string name="Lock_screen_message_channel_description">This channel is necessary for displaying the lock screen message. You should not hide its notifications.</string>
+    <string name="instruction">Here you can set the message you want to be shown on your lock screen. A good idea would be to enter information about the owner of this device.</string>
+    <string name="switch_hint">It can take a moment for the service to start.</string>
 </resources>
