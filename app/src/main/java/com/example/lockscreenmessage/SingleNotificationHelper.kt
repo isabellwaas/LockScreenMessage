@@ -33,12 +33,12 @@ class SingleNotificationHelper(override var notificationIsPresent: Boolean = fal
                     .setContentText(text)
                     .setStyle(NotificationCompat.BigTextStyle()
                         .bigText(text))
-                    //.setDefaults(Notification.)
                     .setPriority(NotificationManager.IMPORTANCE_MAX)
                     .setSilent(true)
                     .setSound(null)
                     .setOngoing(true)
 
+            builder.setPublicVersion(builder.build())
             NotificationManagerCompat.from(context).notify(notificationId, builder.build())
             notificationIsPresent=true
         }

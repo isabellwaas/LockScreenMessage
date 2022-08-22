@@ -19,18 +19,17 @@ class LicensesActivity: AppCompatActivity()
         val licencesBinding:ActivityLicensesBinding = ActivityLicensesBinding.inflate(layoutInflater)
         setContentView(licencesBinding.getRoot())
 
+        setSupportActionBar(licencesBinding.topAppBar)
+        licencesBinding.topAppBar.setNavigationOnClickListener { finish() }
+
+        //Set webview action
         val webView: WebView = licencesBinding.webview
         webView.isVerticalScrollBarEnabled = false
         webView.isHorizontalScrollBarEnabled = false
         webView.loadUrl("file:///android_asset/licenses.html")
 
-        setSupportActionBar(licencesBinding.topAppBar)
-        licencesBinding.topAppBar.setNavigationOnClickListener(View.OnClickListener {
-            finish()
-        })
-
+        //Set webview colors according to theme
         if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-            //Code to enable force dark using FORCE_DARK_ON and select force dark strategy
             if(WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                 WebSettingsCompat.setForceDark(
                     licencesBinding.webview.getSettings(),

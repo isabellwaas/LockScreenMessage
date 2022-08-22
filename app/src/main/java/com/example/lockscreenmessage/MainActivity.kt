@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(activityMainBinding.root)
 
         val persistentSaver: IPersistentSaver = PersistentSaver(getSharedPreferences("settings", Context.MODE_PRIVATE))
-        persistentSaver.writeValue(getString(R.string.lockScreenMessageId), 11223344)
+        persistentSaver.writeValue(getString(R.string.lock_screen_message_id), 11223344)
+
+        val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
         //Set toolbar icon action
         activityMainBinding.topAppBar.menu.findItem(R.id.about).setOnMenuItemClickListener {
@@ -38,10 +40,10 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.showSwitch.setOnCheckedChangeListener { view, isChecked ->
             if (isChecked && !serviceRunning)
             {
-                if(persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lockScreenMessageTitle),null).isNullOrBlank() && persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lockScreenMessageContent), null).isNullOrBlank())
+                if(persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_title),null).isNullOrBlank() && persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_content), null).isNullOrBlank())
                 {
                     MaterialAlertDialogBuilder(this)
-                    .setMessage(getString(R.string.alertDialogMessage))
+                    .setMessage(getString(R.string.alert_dialog_message))
                         .setPositiveButton(getString(R.string.ok)) { dialog, which -> dialog.dismiss() }
                         .show()
                     activityMainBinding.showSwitch.isChecked=false
@@ -49,6 +51,8 @@ class MainActivity : AppCompatActivity() {
                 else {
                     ContextCompat.startForegroundService(this, Intent(this, NotificationService::class.java))
                     serviceRunning = true
+                    inputMethodManager.hideSoftInputFromWindow(activityMainBinding.root.getWindowToken(), 0)
+                    Snackbar.make(activityMainBinding.root, getString(R.string.switch_hint), Snackbar.LENGTH_SHORT).show()
                 }
             } else if (!isChecked && serviceRunning) {
                 stopService(Intent(this, NotificationService::class.java))
@@ -58,11 +62,11 @@ class MainActivity : AppCompatActivity() {
 
         //Set save button action
         activityMainBinding.saveButton.setOnClickListener {
-            persistentSaver.writeValue(getString(R.string.lockScreenMessageTitle), activityMainBinding.titleTextInput.editText?.text.toString())
-            persistentSaver.writeValue(getString(R.string.lockScreenMessageContent), activityMainBinding.contentTextInput.editText?.text.toString())
-            val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            persistentSaver.writeValue(getString(R.string.lock_screen_message_title), activityMainBinding.titleTextInput.editText?.text.toString())
+            persistentSaver.writeValue(getString(R.string.lock_screen_message_content), activityMainBinding.contentTextInput.editText?.text.toString())
             inputMethodManager.hideSoftInputFromWindow(activityMainBinding.root.getWindowToken(), 0)
-            Snackbar.make(activityMainBinding.root, getString(R.string.messageSaved), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(activityMainBinding.root, getString(R.string.message_saved), Snackbar.LENGTH_SHORT).show()
+            it.isEnabled=false
         }
 
         //Set delete button action
@@ -71,13 +75,14 @@ class MainActivity : AppCompatActivity() {
             activityMainBinding.titleTextInput.editText?.text?.clear()
             activityMainBinding.contentTextInput.editText?.clearFocus()
             activityMainBinding.titleTextInput.editText?.clearFocus()
-            persistentSaver.removeValue(getString(R.string.lockScreenMessageTitle))
-            persistentSaver.removeValue(getString(R.string.lockScreenMessageContent))
+            inputMethodManager.hideSoftInputFromWindow(activityMainBinding.root.getWindowToken(), 0)
+            persistentSaver.removeValue(getString(R.string.lock_screen_message_title))
+            persistentSaver.removeValue(getString(R.string.lock_screen_message_content))
         }
 
         //Set edit text watchers
-        activityMainBinding.contentTextInput.editText?.addTextChangedListener(getTextWatcher(activityMainBinding.contentTextInput.editText) { activityMainBinding.titleTextInput.editText?.text.toString().isBlank()})
-        activityMainBinding.titleTextInput.editText?.addTextChangedListener(getTextWatcher(activityMainBinding.titleTextInput.editText) { activityMainBinding.contentTextInput.editText?.text.toString().isBlank()})
+        activityMainBinding.contentTextInput.editText?.addTextChangedListener(getTextWatcher(activityMainBinding.titleTextInput.editText, persistentSaver, com.example.lockscreenmessage.R.string.lock_screen_message_content, com.example.lockscreenmessage.R.string.lock_screen_message_title))
+        activityMainBinding.titleTextInput.editText?.addTextChangedListener(getTextWatcher(activityMainBinding.contentTextInput.editText, persistentSaver, com.example.lockscreenmessage.R.string.lock_screen_message_title, com.example.lockscreenmessage.R.string.lock_screen_message_content))
 
         //causes error: BLASTBufferItemConsumer::onDisconnect()
         activityMainBinding.contentTextInput.editText?.filters= listOf<InputFilter>(object: InputFilter{
@@ -95,15 +100,15 @@ class MainActivity : AppCompatActivity() {
             InputFilter.LengthFilter(240)).toTypedArray()
     }
 
-    fun getTextWatcher(editText: EditText?, secondCondition:()->Boolean): TextWatcher
+    fun getTextWatcher(secondEditText: EditText?, persistentSaver: IPersistentSaver, persistentFirstKey:Int, persistentSecondKey:Int): TextWatcher
     {
         return object: TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int)
             {
-                activityMainBinding.saveButton.isEnabled = !(charSequence.isBlank() && secondCondition.invoke())
-                activityMainBinding.deleteButton.isEnabled = !(charSequence.isBlank() && secondCondition.invoke())
+                activityMainBinding.saveButton.isEnabled = !(charSequence.isBlank() || charSequence.toString() == persistentSaver.readValue(getString(persistentFirstKey),null)) || !(secondEditText?.text.toString().isBlank() || secondEditText?.text.toString() == persistentSaver.readValue(getString(persistentSecondKey),null))
+                activityMainBinding.deleteButton.isEnabled = !(charSequence.isBlank() && secondEditText?.text.toString().isBlank())
             }
 
             override fun afterTextChanged(editable: Editable) {}
