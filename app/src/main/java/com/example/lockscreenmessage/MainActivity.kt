@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             activityMainBinding.contentTextInput.editText?.clearFocus()
             activityMainBinding.titleTextInput.editText?.clearFocus()
             inputMethodManager.hideSoftInputFromWindow(activityMainBinding.root.getWindowToken(), 0)
+            activityMainBinding.showSwitch.isChecked=false
             persistentSaver.removeValue(getString(R.string.lock_screen_message_title))
             persistentSaver.removeValue(getString(R.string.lock_screen_message_content))
         }
