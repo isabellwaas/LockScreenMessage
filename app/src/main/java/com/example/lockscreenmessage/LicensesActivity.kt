@@ -19,6 +19,7 @@ class LicensesActivity: AppCompatActivity()
         val licencesBinding:ActivityLicensesBinding = ActivityLicensesBinding.inflate(layoutInflater)
         setContentView(licencesBinding.getRoot())
 
+        //Set appbar action
         setSupportActionBar(licencesBinding.topAppBar)
         licencesBinding.topAppBar.setNavigationOnClickListener { finish() }
 

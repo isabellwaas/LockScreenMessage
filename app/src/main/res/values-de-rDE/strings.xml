@@ -19,7 +19,7 @@
     <string name="alert_dialog_message">Mindestens eins der Textfelder muss Text beinhalten.</string>
     <string name="message_saved">Nachricht gespeichert.</string>
     <string name="Service_channel_name">Service</string>
-    <string name="Service_message_content">Diese Benachrichtigung ist notwendig. Blende sie durch langes Drücken und Deaktivieren des Servicekanals aus.</string>
+    <string name="Service_message_content">Diese Benachrichtigung ist notwendig. Blende sie aus durch langes Drücken und Deaktivieren des Servicekanals.</string>
     <string name="Service_channel_description">This channel is necessary for the service to work. You can still hide its notifications.</string>
     <string name="Lock_screen_message_channel_name">Dauerhafte Sperrbildschirmnachricht</string>
     <string name="Lock_screen_message_channel_description">Dieser Kanal ist notwendig, um die Sperrbildschirmnachricht anzuzeigen. Du solltest seine Benachrichtigungen nicht ausblenden.</string>

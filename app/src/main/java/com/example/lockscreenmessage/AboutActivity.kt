@@ -10,11 +10,20 @@ import com.example.lockscreenmessage.databinding.ActivityAboutBinding
 
 class AboutActivity: AppCompatActivity()
 {
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
+        
         val aboutBinding: ActivityAboutBinding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(aboutBinding.getRoot())
 
+        // Set appbar action
+        setSupportActionBar(aboutBinding.topAppBar)
+        aboutBinding.topAppBar.setNavigationOnClickListener(View.OnClickListener {
+            finish()
+        })
+
+        // Set developer button action
         aboutBinding.developer.setOnClickListener { view ->
             startActivity(
                 Intent(
@@ -24,13 +33,9 @@ class AboutActivity: AppCompatActivity()
             )
         }
 
+        // Set licences button action
         aboutBinding.licences.setOnClickListener { view: View? ->
             startActivity(Intent(applicationContext, LicensesActivity::class.java))
         }
-
-        setSupportActionBar(aboutBinding.topAppBar)
-        aboutBinding.topAppBar.setNavigationOnClickListener(View.OnClickListener {
-            finish()
-        })
     }
 }
