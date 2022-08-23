@@ -3,12 +3,9 @@ package com.example.lockscreenmessage
 import android.R
 import android.app.Notification
 import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
-import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 
 
 class SingleNotificationHelper(override var notificationIsPresent: Boolean = false):ISingleNotificationHelper
@@ -23,24 +20,29 @@ class SingleNotificationHelper(override var notificationIsPresent: Boolean = fal
         NotificationManagerCompat.from(context).createNotificationChannel(notificationChannel)
     }
 
-    override fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String):Unit
+    override fun buildNotificationWithPublicVersion(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int):Notification
+    {
+        val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
+            .setSmallIcon(R.drawable.sym_def_app_icon)
+            .setContentTitle(title)
+            .setContentText(text)
+            .setPriority(priority)
+            .setSilent(true)
+            .setSound(null)
+            .setOngoing(true)
+
+        builder.setPublicVersion(builder.build())
+        return builder.build()
+    }
+
+    override fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int):Unit
     {
         if(!notificationIsPresent)
         {
-            val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
-                    .setSmallIcon(R.drawable.sym_def_app_icon)
-                    .setContentTitle(title)
-                    .setContentText(text)
-                    .setStyle(NotificationCompat.BigTextStyle()
-                        .bigText(text))
-                    .setPriority(NotificationManager.IMPORTANCE_MAX)
-                    .setSilent(true)
-                    .setSound(null)
-                    .setOngoing(true)
-
-            builder.setPublicVersion(builder.build())
-            NotificationManagerCompat.from(context).notify(notificationId, builder.build())
-            notificationIsPresent=true
+            buildNotificationWithPublicVersion(context, channelId, notificationId, title, text, priority).let{
+                NotificationManagerCompat.from(context).notify(notificationId, it)
+                notificationIsPresent = true
+            }
         }
     }
 

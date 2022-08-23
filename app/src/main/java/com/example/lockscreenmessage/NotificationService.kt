@@ -1,13 +1,11 @@
 package com.example.lockscreenmessage
 
-import android.R
 import android.app.*
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
-import androidx.core.app.NotificationCompat
 
 
 class NotificationService: Service()
@@ -22,14 +20,7 @@ class NotificationService: Service()
     {
         val serviceSingleNotificationHelper:ISingleNotificationHelper = SingleNotificationHelper()
         serviceSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.service_channel_id), getString(com.example.lockscreenmessage.R.string.Service_channel_name), getString(com.example.lockscreenmessage.R.string.Service_channel_description), NotificationManager.IMPORTANCE_DEFAULT, Notification.VISIBILITY_PRIVATE, this.applicationContext)
-
-        val notification: Notification = NotificationCompat.Builder(this, getString(com.example.lockscreenmessage.R.string.service_channel_id))
-            .setContentTitle(getString(com.example.lockscreenmessage.R.string.Service_channel_name))
-            .setContentText(getString(com.example.lockscreenmessage.R.string.Service_message_content))
-            .setSmallIcon(R.drawable.sym_def_app_icon)
-            .build()
-
-        startForeground(1, notification)
+        startForeground(44556677, serviceSingleNotificationHelper.buildNotificationWithPublicVersion(this, getString(com.example.lockscreenmessage.R.string.service_channel_id), 1, getString(com.example.lockscreenmessage.R.string.Service_channel_name), getString(com.example.lockscreenmessage.R.string.Service_message_content), NotificationManager.IMPORTANCE_DEFAULT))
         return START_STICKY
     }
 
