@@ -9,6 +9,10 @@ class PersistentSaver(override val sharedPreferences: SharedPreferences):IPersis
         return this.sharedPreferences.getString(key, defaultValue)
     }
 
+    override fun readValue(key: String, defaultValue: Boolean): Boolean {
+        return this.sharedPreferences.getBoolean(key, defaultValue)
+    }
+
     override fun readValue(key: String, defaultValue: Int): Int {
         return this.sharedPreferences.getInt(key, defaultValue)
     }
@@ -17,6 +21,12 @@ class PersistentSaver(override val sharedPreferences: SharedPreferences):IPersis
     {
         val editor:SharedPreferences.Editor=this.sharedPreferences.edit()
         editor.putString(key, value)
+        editor.apply()
+    }
+
+    override fun writeValue(key: String, value: Boolean) {
+        val editor:SharedPreferences.Editor=this.sharedPreferences.edit()
+        editor.putBoolean(key, value)
         editor.apply()
     }
 

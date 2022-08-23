@@ -19,8 +19,8 @@ class NotificationService: Service()
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int
     {
         val serviceSingleNotificationHelper:ISingleNotificationHelper = SingleNotificationHelper()
-        serviceSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.service_channel_id), getString(com.example.lockscreenmessage.R.string.Service_channel_name), getString(com.example.lockscreenmessage.R.string.Service_channel_description), NotificationManager.IMPORTANCE_DEFAULT, Notification.VISIBILITY_PRIVATE, this.applicationContext)
-        startForeground(44556677, serviceSingleNotificationHelper.buildNotificationWithPublicVersion(this, getString(com.example.lockscreenmessage.R.string.service_channel_id), 1, getString(com.example.lockscreenmessage.R.string.Service_channel_name), getString(com.example.lockscreenmessage.R.string.Service_message_content), NotificationManager.IMPORTANCE_DEFAULT))
+        serviceSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.service_channel_id), getString(com.example.lockscreenmessage.R.string.service_channel_name), getString(com.example.lockscreenmessage.R.string.service_channel_description), NotificationManager.IMPORTANCE_DEFAULT, Notification.VISIBILITY_PRIVATE, this.applicationContext)
+        startForeground(44556677, serviceSingleNotificationHelper.buildNotificationWithPublicVersion(this, getString(com.example.lockscreenmessage.R.string.service_channel_id), 1, getString(com.example.lockscreenmessage.R.string.service_channel_name), getString(com.example.lockscreenmessage.R.string.service_message_content), NotificationManager.IMPORTANCE_DEFAULT))
         return START_STICKY
     }
 
@@ -28,7 +28,7 @@ class NotificationService: Service()
     {
         super.onCreate()
         val lockScreenSingleNotificationHelper:ISingleNotificationHelper = SingleNotificationHelper()
-        lockScreenSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.lock_screen_channel_id), getString(com.example.lockscreenmessage.R.string.Lock_screen_message_channel_name), getString(com.example.lockscreenmessage.R.string.Lock_screen_message_channel_description), NotificationManager.IMPORTANCE_HIGH, Notification.VISIBILITY_PUBLIC, this.applicationContext)
+        lockScreenSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.lock_screen_channel_id), getString(com.example.lockscreenmessage.R.string.lock_screen_message_channel_name), getString(com.example.lockscreenmessage.R.string.lock_screen_message_channel_description), NotificationManager.IMPORTANCE_HIGH, Notification.VISIBILITY_PUBLIC, this.applicationContext)
 
         receiver=LockUnlockBroadcastReceiver(lockScreenSingleNotificationHelper, getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager)
 

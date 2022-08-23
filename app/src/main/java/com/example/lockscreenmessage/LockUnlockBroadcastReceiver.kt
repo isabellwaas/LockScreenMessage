@@ -24,7 +24,6 @@ class LockUnlockBroadcastReceiver(val singleNotificationHelper: ISingleNotificat
                 this.singleNotificationHelper.cancelNotificationIfOnePresent(context, persistentSaver.readValue(context.getString(com.example.lockscreenmessage.R.string.lock_screen_message_id), 11223344))
             }
         }
-        else println("context is null")
     }
 
 }

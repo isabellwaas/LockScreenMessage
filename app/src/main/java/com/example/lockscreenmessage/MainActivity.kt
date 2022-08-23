@@ -35,10 +35,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        //Set switch action
-        var serviceRunning: Boolean = false
+        //Set switch action and default state
+        var serviceRunning: Boolean = persistentSaver.readValue(getString(R.string.lock_screen_message_enabled), false)
         activityMainBinding.showSwitch.setOnCheckedChangeListener { view, isChecked ->
-            if (isChecked && !serviceRunning)
+            if (!isChecked && serviceRunning) {
+                stopService(Intent(this, NotificationService::class.java))
+                persistentSaver.writeValue(getString(R.string.lock_screen_message_enabled), false)
+            }
+            else if (isChecked && !serviceRunning)
             {
                 if(persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_title),null).isNullOrBlank() && persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_content), null).isNullOrBlank())
                 {
@@ -48,17 +52,16 @@ class MainActivity : AppCompatActivity() {
                         .show()
                     activityMainBinding.showSwitch.isChecked=false
                 }
-                else {
+                else
+                {
                     ContextCompat.startForegroundService(this, Intent(this, NotificationService::class.java))
-                    serviceRunning = true
                     inputMethodManager.hideSoftInputFromWindow(activityMainBinding.root.getWindowToken(), 0)
                     Snackbar.make(activityMainBinding.root, getString(R.string.switch_hint), Snackbar.LENGTH_SHORT).show()
+                    persistentSaver.writeValue(getString(R.string.lock_screen_message_enabled), true)
                 }
-            } else if (!isChecked && serviceRunning) {
-                stopService(Intent(this, NotificationService::class.java))
-                serviceRunning = false
             }
         }
+        if(serviceRunning) { activityMainBinding.showSwitch.isChecked=true }
 
         //Set save button action
         activityMainBinding.saveButton.setOnClickListener {
@@ -81,9 +84,15 @@ class MainActivity : AppCompatActivity() {
             persistentSaver.removeValue(getString(R.string.lock_screen_message_content))
         }
 
-        //Set edit text watchers
+        //Set edit text watchers and default state
         activityMainBinding.contentTextInput.editText?.addTextChangedListener(getTextWatcher(activityMainBinding.titleTextInput.editText, persistentSaver, com.example.lockscreenmessage.R.string.lock_screen_message_content, com.example.lockscreenmessage.R.string.lock_screen_message_title))
         activityMainBinding.titleTextInput.editText?.addTextChangedListener(getTextWatcher(activityMainBinding.contentTextInput.editText, persistentSaver, com.example.lockscreenmessage.R.string.lock_screen_message_title, com.example.lockscreenmessage.R.string.lock_screen_message_content))
+
+        val currentTitle: String? = persistentSaver.readValue(getString(R.string.lock_screen_message_title), null)
+        if(!(currentTitle.isNullOrBlank())) activityMainBinding.titleTextInput.editText?.setText(currentTitle)
+        val currentContent: String? = persistentSaver.readValue(getString(R.string.lock_screen_message_content), null)
+        if(!(currentContent.isNullOrBlank())) activityMainBinding.contentTextInput.editText?.setText(currentContent)
+
 
         //causes error: BLASTBufferItemConsumer::onDisconnect()
         activityMainBinding.contentTextInput.editText?.filters= listOf<InputFilter>(object: InputFilter{
@@ -115,5 +124,4 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(editable: Editable) {}
         }
     }
-
 }
