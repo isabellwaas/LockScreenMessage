@@ -36,13 +36,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Set switch action and default state
-        var serviceRunning: Boolean = persistentSaver.readValue(getString(R.string.lock_screen_message_enabled), false)
         activityMainBinding.showSwitch.setOnCheckedChangeListener { view, isChecked ->
-            if (!isChecked && serviceRunning) {
+            if (!isChecked && persistentSaver.readValue(getString(R.string.lock_screen_message_enabled), false)) {
                 stopService(Intent(this, NotificationService::class.java))
                 persistentSaver.writeValue(getString(R.string.lock_screen_message_enabled), false)
             }
-            else if (isChecked && !serviceRunning)
+            else if (isChecked && !persistentSaver.readValue(getString(R.string.lock_screen_message_enabled), false))
             {
                 if(persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_title),null).isNullOrBlank() && persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_content), null).isNullOrBlank())
                 {
@@ -51,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                         .setPositiveButton(getString(R.string.ok)) { dialog, which -> dialog.dismiss() }
                         .show()
                     activityMainBinding.showSwitch.isChecked=false
+                    persistentSaver.writeValue(getString(R.string.lock_screen_message_enabled), false)
                 }
                 else
                 {
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        if(serviceRunning) { activityMainBinding.showSwitch.isChecked=true }
+        if(persistentSaver.readValue(getString(R.string.lock_screen_message_enabled), false)) { activityMainBinding.showSwitch.isChecked=true }
 
         //Set save button action
         activityMainBinding.saveButton.setOnClickListener {
