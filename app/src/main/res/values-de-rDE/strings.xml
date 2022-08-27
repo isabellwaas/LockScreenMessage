@@ -18,4 +18,5 @@
     <string name="lock_screen_message_channel_description">Dieser Kanal ist notwendig, um die Sperrbildschirmnachricht anzuzeigen. Du solltest seine Benachrichtigungen nicht ausblenden.</string>
     <string name="instruction">Hier kannst du die Nachricht festlegen, die auf dem Sperrbildschirm erscheinen soll. Eine gute Idee wäre es, Informationen über den Besitzer dieses Geräts zu hinterlegen.</string>
     <string name="switch_hint">Es kann einen Moment dauern bis der Service startet.</string>
+    <string name="auto_start_hint">Bei einigen Geräten ist es notwendig, den Autostart für diese App zu aktivieren, damit sie nach dem Neustart automatisch deine Sperrbildschirmnachricht anzeigt. Du kannst dies in den Geräteeinstellungen tun.</string>
 </resources>

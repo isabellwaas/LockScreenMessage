@@ -1,5 +1,6 @@
 package com.example.lockscreenmessage
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +29,16 @@ class MainActivity : AppCompatActivity() {
         persistentSaver.writeValue(getString(R.string.lock_screen_message_id), 11223344)
 
         val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
+        //Show auto start popup on first start
+        if(persistentSaver.readValue(getString(R.string.first_app_start), true))
+        {
+            MaterialAlertDialogBuilder(this)
+                .setMessage(getString(R.string.auto_start_hint))
+                .setPositiveButton(getString(R.string.ok)) { dialog, which -> dialog.dismiss() }
+                .show()
+            persistentSaver.writeValue(getString(R.string.first_app_start), false)
+        }
 
         //Set toolbar icon action
         activityMainBinding.topAppBar.menu.findItem(R.id.about).setOnMenuItemClickListener {
