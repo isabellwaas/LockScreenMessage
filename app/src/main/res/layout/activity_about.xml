@@ -22,7 +22,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center"
@@ -36,6 +36,7 @@
             android:layout_height="130dp"
             app:cardElevation="10dp"
             app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="#fff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="15dp">
@@ -75,8 +76,8 @@
             android:text="@string/developer_capslock" />
 
         <com.google.android.material.button.MaterialButton
-            style="@style/aboutButtonStyle"
             android:id="@+id/licences"
+            style="@style/aboutButtonStyle"
             android:text="@string/licences_capslock" />
 
     </LinearLayout>
