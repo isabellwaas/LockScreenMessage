@@ -10,6 +10,18 @@ The Android app **LockScreenMessage** lets you show any message you like permane
 It can be especially useful for showing contact information in case the device gets lost.
 <br><br>
 
+<p align="center">
+<img src="https://github.com/isabellwaas/LockScreenMessage/blob/main/screenshots/lightmode.jpg" width="30%" padding="10px 10px 10px 10px">
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/isabellwaas/LockScreenMessage/blob/main/screenshots/darkmode.jpg" width="30%" padding="10px 10px 10px 10px">
+</p>
+<br>
+<p align="center">
+<img src="https://github.com/isabellwaas/LockScreenMessage/blob/main/screenshots/lightmodemessage.jpg" width="30%" padding="10px 10px 10px 10px">
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://github.com/isabellwaas/LockScreenMessage/blob/main/screenshots/darkmodemessage.jpg" width="30%" padding="10px 10px 10px 10px">
+</p>
+
 ## Themes
 **LockScreenMessage** has a light and a dark theme that adapts to the system settings.
 <br><br>
