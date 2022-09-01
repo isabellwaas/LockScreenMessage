@@ -31,17 +31,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="225dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:elevation="10dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"
+        <androidx.cardview.widget.CardView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="15dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_app_icon"/>
+
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             style="@style/TextAppearance.MaterialComponents.Body1"
