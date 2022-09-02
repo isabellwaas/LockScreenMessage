@@ -20,10 +20,10 @@ class SingleNotificationHelper(override var notificationIsPresent: Boolean = fal
         NotificationManagerCompat.from(context).createNotificationChannel(notificationChannel)
     }
 
-    override fun buildNotificationWithPublicVersion(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int):Notification
+    override fun buildNotificationWithPublicVersion(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int, icon:Int):Notification
     {
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.sym_def_app_icon)
+            .setSmallIcon(icon)
             .setContentTitle(title)
             .setContentText(text)
             .setPriority(priority)
@@ -35,11 +35,11 @@ class SingleNotificationHelper(override var notificationIsPresent: Boolean = fal
         return builder.build()
     }
 
-    override fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int):Unit
+    override fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int, icon:Int):Unit
     {
         if(!notificationIsPresent)
         {
-            buildNotificationWithPublicVersion(context, channelId, notificationId, title, text, priority).let{
+            buildNotificationWithPublicVersion(context, channelId, notificationId, title, text, priority, icon).let{
                 NotificationManagerCompat.from(context).notify(notificationId, it)
                 notificationIsPresent = true
             }

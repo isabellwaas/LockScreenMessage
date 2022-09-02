@@ -8,7 +8,7 @@ interface ISingleNotificationHelper
     var notificationIsPresent:Boolean
 
     fun createNotificationChannel(id:String, name:String, description:String, importance:Int, lockscreenVisibility:Int, context: Context):Unit
-    fun buildNotificationWithPublicVersion(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int): Notification
-    fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority:Int):Unit
+    fun buildNotificationWithPublicVersion(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority: Int, icon:Int): Notification
+    fun sendNotificationIfNonePresent(context:Context, channelId:String, notificationId:Int, title:String, text:String, priority:Int, icon:Int):Unit
     fun cancelNotificationIfOnePresent(context:Context, id:Int):Unit
 }

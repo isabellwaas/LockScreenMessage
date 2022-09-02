@@ -20,7 +20,7 @@ class NotificationService: Service()
     {
         val serviceSingleNotificationHelper:ISingleNotificationHelper = SingleNotificationHelper()
         serviceSingleNotificationHelper.createNotificationChannel(getString(com.example.lockscreenmessage.R.string.service_channel_id), getString(com.example.lockscreenmessage.R.string.service_channel_name), getString(com.example.lockscreenmessage.R.string.service_channel_description), NotificationManager.IMPORTANCE_DEFAULT, Notification.VISIBILITY_PRIVATE, this.applicationContext)
-        startForeground(44556677, serviceSingleNotificationHelper.buildNotificationWithPublicVersion(this, getString(com.example.lockscreenmessage.R.string.service_channel_id), 1, getString(com.example.lockscreenmessage.R.string.service_channel_name), getString(com.example.lockscreenmessage.R.string.service_message_content), NotificationManager.IMPORTANCE_DEFAULT))
+        startForeground(44556677, serviceSingleNotificationHelper.buildNotificationWithPublicVersion(this, getString(com.example.lockscreenmessage.R.string.service_channel_id), 1, getString(com.example.lockscreenmessage.R.string.service_channel_name), getString(com.example.lockscreenmessage.R.string.service_message_content), NotificationManager.IMPORTANCE_DEFAULT, R.drawable.ic_notification))
         return START_STICKY
     }
 
