@@ -27,6 +27,7 @@ class SingleNotificationHelper(override var notificationIsPresent: Boolean = fal
             .setContentTitle(title)
             .setContentText(text)
             .setPriority(priority)
+            .setShowWhen(false)
             .setSilent(true)
             .setSound(null)
             .setOngoing(true)
