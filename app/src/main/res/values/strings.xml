@@ -26,6 +26,6 @@
     <string name="instruction">Here you can set the message you want to be shown on your lock screen. A good idea would be to enter information about the owner of this device.</string>
     <string name="switch_hint">It can take a moment for the service to start.</string>
     <string name="lock_screen_message_enabled" translatable="false">lockScreenMessageEnabled</string>
-    <string name="auto_start_hint">For some devices it is necessary to manually activate auto start for this app in order to let it show your lock screen message automatically after boot. You can do this in the device settings. Unfortunately, on some devices showing the message after boot might not work at all.</string>
+    <string name="auto_start_hint">"For some devices it is necessary to manually activate auto start for this app in order to let it show your lock screen message automatically after boot. You can do this in the device settings. Unfortunately, on some devices showing the message after boot might not work at all.\n\nFurthermore, in the settings of the lock screen message notification channel, it should be selected that the message is displayed even during Do Not Disturb mode."</string>
     <string name="first_message_activation" translatable="false">firstMessageActivation</string>
 </resources>
