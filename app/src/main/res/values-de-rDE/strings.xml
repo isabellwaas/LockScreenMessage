@@ -10,7 +10,7 @@
     <string name="about">Über</string>
     <string name="ok">Ok</string>
     <string name="show_message">Nachricht anzeigen</string>
-    <string name="alert_dialog_message">Mindestens eins der Textfelder muss Text beinhalten.</string>
+    <string name="text_saved_hint">Ein Text für die Sperrbildschirmnachricht muss gespeichert worden sein.</string>
     <string name="message_saved">Nachricht gespeichert.</string>
     <string name="service_message_content">Diese Benachrichtigung ist notwendig. Blende sie aus durch langes Drücken und Deaktivieren des Servicekanals.</string>
     <string name="service_channel_description">This channel is necessary for the service to work. You can still hide its notifications.</string>

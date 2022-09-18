@@ -16,7 +16,7 @@
     <string name="about">About</string>
     <string name="ok">Ok</string>
     <string name="show_message">Show Message</string>
-    <string name="alert_dialog_message">At least one of the text fields must contain text.</string>
+    <string name="text_saved_hint">A text for the lock screen message must have been saved.</string>
     <string name="message_saved">Message saved.</string>
     <string name="service_channel_name" translatable="false">Service</string>
     <string name="service_message_content">This notification is necessary. Hide it by long pressing and disabling the service channel.</string>
@@ -27,5 +27,5 @@
     <string name="switch_hint">It can take a moment for the service to start.</string>
     <string name="lock_screen_message_enabled" translatable="false">lockScreenMessageEnabled</string>
     <string name="auto_start_hint">For some devices it is necessary to manually activate auto start for this app in order to let it show your lock screen message automatically after boot. You can do this in the device settings. Unfortunately, on some devices showing the message after boot might not work at all.</string>
-    <string name="first_app_start" translatable="false">firstAppStart</string>
+    <string name="first_message_activation" translatable="false">firstMessageActivation</string>
 </resources>

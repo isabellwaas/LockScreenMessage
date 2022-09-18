@@ -1,6 +1,5 @@
 package com.example.lockscreenmessage
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,16 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 
-        //Show auto start popup on first start
-        if(persistentSaver.readValue(getString(R.string.first_app_start), true))
-        {
-            MaterialAlertDialogBuilder(this)
-                .setMessage(getString(R.string.auto_start_hint))
-                .setPositiveButton(getString(R.string.ok)) { dialog, which -> dialog.dismiss() }
-                .show()
-            persistentSaver.writeValue(getString(R.string.first_app_start), false)
-        }
-
         //Set toolbar icon action
         activityMainBinding.topAppBar.menu.findItem(R.id.about).setOnMenuItemClickListener {
             startActivity(Intent(this, AboutActivity::class.java))
@@ -57,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 if(persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_title),null).isNullOrBlank() && persistentSaver.readValue(this.getString(com.example.lockscreenmessage.R.string.lock_screen_message_content), null).isNullOrBlank())
                 {
                     MaterialAlertDialogBuilder(this)
-                    .setMessage(getString(R.string.alert_dialog_message))
+                    .setMessage(getString(R.string.text_saved_hint))
                         .setPositiveButton(getString(R.string.ok)) { dialog, which -> dialog.dismiss() }
                         .show()
                     activityMainBinding.showSwitch.isChecked=false
@@ -69,6 +58,16 @@ class MainActivity : AppCompatActivity() {
                     inputMethodManager.hideSoftInputFromWindow(activityMainBinding.root.getWindowToken(), 0)
                     Snackbar.make(activityMainBinding.root, getString(R.string.switch_hint), Snackbar.LENGTH_SHORT).show()
                     persistentSaver.writeValue(getString(R.string.lock_screen_message_enabled), true)
+
+                    //Show auto start popup on first message activation
+                    if(persistentSaver.readValue(getString(R.string.first_message_activation), true))
+                    {
+                        MaterialAlertDialogBuilder(this)
+                            .setMessage(getString(R.string.auto_start_hint))
+                            .setPositiveButton(getString(R.string.ok)) { dialog, which -> dialog.dismiss() }
+                            .show()
+                        persistentSaver.writeValue(getString(R.string.first_message_activation), false)
+                    }
                 }
             }
         }
